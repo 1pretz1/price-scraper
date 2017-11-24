@@ -9,10 +9,8 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to '/'
-      flash[:danger] = 'You have succesfully created your account'
     else
       render 'new'
-      flash[:danger] = 'There was an error creating your account'
     end
   end
 

@@ -16,6 +16,6 @@ feature 'User signs in' do
     fill_in 'email', with: user.email
     fill_in 'password', with: 'password'
     click_button 'Submit'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq login_path
   end
 end

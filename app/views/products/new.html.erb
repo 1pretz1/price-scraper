@@ -1,7 +1,14 @@
-<h1>Product URL page</h1>
+<h1 align='center'>Product URL page</h1>
 
-<%= form_for :product do |f| %>
-  Product URL: <%= f.text_field :product_url %>
-  <%= f.submit "Submit" %>
-<% end %>
+<div align='center'>
+  <% if @product.errors.any? %>
+    <% @product.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
 
+  <%= form_for :product do |f| %>
+    Product URL: <%= f.text_field :product_url %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>

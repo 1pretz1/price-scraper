@@ -1,22 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PriceScraper</title>
+    <script>
+      $(document).ready(function () {
+        $(function () {
+          $('li a').click(function (e) {
+            $('a').removeClass('active');
+            $(this).addClass('active');
+          });
+        });
+      });
+    </script>
+      <title>PriceScraper</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= link_to "Home", '/' %> |
-    <% if current_user %>
-      Signed in as <%= link_to current_user.email, user_path(current_user.id) %> |
-      <%= link_to "Logout", '/logout' %> |
-      <%= link_to "New URL", product_path %>
-    <% else %>
-      <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/users/new' %>
-    <% end %>
+    <div class="navbar-outer">
+      <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Price Monitor</a></li>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <% if current_user %>
+            <li>
+            <%= link_to current_user.email, user_path(current_user.id) %>
+            </li>
+            <li>
+            <%= link_to "New URL", product_path %>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li>
+            <%= link_to(raw('<span class="glyphicon glyphicon-log-out">Log out</span>'), '/logout')  %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to(raw('<span class="glyphicon glyphicon-user">Sign up</span>'), new_user_path)  %>
+            </li>
+            <li>
+            <%= link_to(raw('<span class="glyphicon glyphicon-log-in">Login</span>'), '/login') %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      </nav>
+    </div>
     <%= yield %>
   </body>
 </html>

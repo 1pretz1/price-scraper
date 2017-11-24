@@ -1,9 +1,15 @@
-<h1>Login</h1>
+<h1 align='center'>Login</h1>
 
-<%= form_tag '/login' do %>
+<div align='center'>
+  <%= flash[:danger] %>
 
-  Email: <%= text_field_tag :email %>
-  Password: <%= password_field_tag :password %>
-  <%= submit_tag "Submit" %>
+  <%= form_tag '/login' do %>
 
-<% end %>
+    Email:<br>
+    <%= text_field_tag :email %></br>
+    Password:<br>
+    <%= password_field_tag :password %></br>
+    <%= submit_tag "Submit" %>
+
+  <% end %>
+</div>
