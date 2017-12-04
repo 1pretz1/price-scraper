@@ -1,0 +1,19 @@
+<h1 align='center'>Add new website</h1>
+
+<div align='center'>
+  <% if @product_website.errors.any? %>
+    <% @product_website.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
+
+  <%= flash[:notice] %>
+
+  <%= form_for :product_website do |f| %>
+    Website URL:<br> <%= f.text_field :website_url %></br>
+    Product price tag:<br> <%= f.text_field :product_price_name %></br>
+    Sale price tag:<br> <%= f.text_field :now_price_name %></br>
+    Original price tag:<br> <%= f.text_field :was_price_name %></br>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>

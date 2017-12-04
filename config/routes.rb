@@ -7,8 +7,11 @@ Rails.application.routes.draw do
   get '/product', to: 'products#new'
   post '/product', to: 'products#create'
 
+  get '/productwebsites/new', to: 'product_websites#new'
+  post '/productwebsites/new', to: 'product_websites#create'
+
   get '/login', to: 'sessions#new'
-  post '/login' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 
 end

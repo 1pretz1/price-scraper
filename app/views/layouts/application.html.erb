@@ -33,6 +33,11 @@
             <li>
             <%= link_to "New URL", product_path %>
             </li>
+            <% if admin? %>
+              <li>
+              <%= link_to "Add new website", productwebsites_new_path %>
+              </li>
+            <% end %>
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">

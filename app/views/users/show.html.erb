@@ -3,6 +3,7 @@
 <% @user.products.each do |product| %>
   <ul align='center' style="list-style-type: none">
     <li><%= url_host(product.product_url) %></li>
+    <li><%= product.name %>: £<%= product.price %></li>
     <li><%=link_to product.product_url, product.product_url %></li>
   </ul>
 <% end %>
