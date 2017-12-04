@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(current_user.id)
+    @orders = @user.products.group_by { |x| url_host(x.product_url) }
   end
 
   private
