@@ -9,25 +9,14 @@ class ProductsController < ApplicationController
   def create
     @product = current_user.products.create(product_params)
     if @product.save
-      web_scraper
+      InitialWebScrape.call(product: @product)
       redirect_to '/'
     else
       render 'new'
     end
   end
 
-  private
-
-  def web_scraper
-    user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
-
-    page = Nokogiri::XML(open(@product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
-    @header = page.css('h1').text
-    product_url_check = ProductWebsite.all.select { |x| @product.product_url.include?(x.website_url) }
-    price_tag_text = page.css(product_url_check[0].product_price_name).text
-    @correct_price_format = price_tag_text.gsub(/([^0-9.])/, "")
-    @product.update_attributes(name: @header, price: @correct_price_format)
-  end
+ private
 
   def product_params
     params.require(:product).permit(:product_url)
