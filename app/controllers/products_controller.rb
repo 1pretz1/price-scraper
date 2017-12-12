@@ -1,8 +1,8 @@
-require 'open-uri'
-
 class ProductsController < ApplicationController
 
-  def new
+  include ApplicationHelper
+
+def new
     @product = Product.new
   end
 
@@ -10,7 +10,8 @@ class ProductsController < ApplicationController
     @product = current_user.products.create(product_params)
     if @product.save
       InitialWebScrape.call(product: @product)
-      redirect_to '/'
+      redirect_to "/users/#{current_user.id}"
+      flash[:success] = "#{@product.name} has been saved"
     else
       render 'new'
     end

@@ -1,4 +1,8 @@
-<h1 align='center'>Add new website</h1>
+<% flash.each do |key, value| %>
+  <div align='center' class="<%= flash_class(key) %>">
+    <%= value %>
+  </div>
+<% end %>
 
 <div align='center'>
   <% if @product_website.errors.any? %>
@@ -7,7 +11,7 @@
     <% end %>
   <% end %>
 
-  <%= flash[:notice] %>
+  <h1 align='center'>Add new website</h1>
 
   <%= form_for :product_website do |f| %>
     Website URL:<br> <%= f.text_field :website_url %></br>

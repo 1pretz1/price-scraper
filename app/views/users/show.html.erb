@@ -1,13 +1,27 @@
-<h1 class='product_list_header' align='center'>Hey <%= @user.email %>, these are your saved items being tracked...</h1>
-
-<% @orders.each do |website, product| %>
-  <div class='product_list_div'>
-    <ul align='center' style="list-style-type: none">
-      <li class='product_list'><strong><%= website %></strong></li>
-      <% product.each do |each_product| %>
-        <li class='product_list'><%= each_product.name %>: £<%= each_product.price %></li>
-        <li class='product_list'><%=link_to each_product.product_url, each_product.product_url %></li>
-      <% end %>
-    </ul>
+<% flash.each do |key, value| %>
+  <div align='center' class="<%= flash_class(key) %>">
+    <%= value %>
   </div>
 <% end %>
+
+<div class='show_body'>
+  <h1 class='product_list_header' align='center'>
+    <strong>
+      Hey <%= current_user.email %>, these are your saved items being tracked...
+    </strong>
+  </h1>
+
+  <% @orders.each do |website, product| %>
+    <h2 class='product_item_header'><%= website %></h2>
+    <div class='product_list_div'>
+      <ul align='center' style="list-style-type: none">
+        <% product.each do |each_product| %>
+          <li class='product_list'><%= each_product.name %>: <strong>£<%= each_product.price %></strong></li>
+          <li class='product_list'><%= each_product.description %></li>
+          <li class='product_list'><%= image_tag each_product.image_url %></li>
+          <li class='product_list'><%=link_to each_product.product_url, each_product.product_url, target: :_blank %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

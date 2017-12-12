@@ -14,17 +14,23 @@
 @import "bootstrap";
 
 .navbar-outer {
-  width:80%;
   margin: 0 auto;
 }
 
-li.product_list {
+.product_list {
   margin:0 0 10px 0;
+}
+
+img {
+  display:inline-block;
+  max-width:400px;
+  max-height:300px;
+  width: auto;
+  height: auto;
 }
 
 div.product_list_div {
   border-top:5px solid black;
-  width:80%;
   margin: 0 auto;
   padding: 20px;
 }
@@ -32,6 +38,14 @@ div.product_list_div {
 h1.product_list_header {
   padding: 30px;
   font-size: 2em;
-  width:80%;
   margin: 0 auto;
+}
+
+.product_item_header {
+   text-align: center;
+}
+
+.show_body {
+  margin: 0 auto;
+  width: 68%;
 }
