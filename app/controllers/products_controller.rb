@@ -11,7 +11,7 @@ def new
     if @product.save
       InitialWebScrape.call(product: @product)
       redirect_to "/users/#{current_user.id}"
-      flash[:success] = "#{@product.name} has been saved"
+      flash[:success] = "'#{@product.name}' has been saved"
     else
       render 'new'
     end

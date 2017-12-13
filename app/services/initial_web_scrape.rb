@@ -37,7 +37,11 @@ class InitialWebScrape
   end
 
   def price_text
-    web_page.css(product_url_check[0].product_price_name)[0].text
+    if attributes[:price] == nil
+      web_page.css(product_url_check[0].product_price_name)[0].text
+    else
+      attributes[:price]
+    end
   end
 
   def correct_price_format
@@ -45,8 +49,12 @@ class InitialWebScrape
   end
 
   def get_info
+    binding.pry
     attributes[:title] = web_page.at('meta[property="og:title"]')['content']
     attributes[:description] = web_page.at('meta[property="og:description"]')['content']
     attributes[:image] = web_page.at('meta[property="og:image"]')['content']
+    if web_page.at('meta[property="og:price:amount"]') != nil
+      attributes[:price] = web_page.at('meta[property="og:price:amount"]')['content']
+    end
   end
 end
