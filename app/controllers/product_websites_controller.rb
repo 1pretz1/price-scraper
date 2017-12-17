@@ -17,7 +17,7 @@ class ProductWebsitesController < ApplicationController
   private
 
   def product_website_params
-    params.require(:product_website).permit(:website_url, :product_price_name, :now_price_name, :was_price_name)
+    params.require(:product_website).permit(:website_url, :product_price_name, :now_price_name)
   end
 
 end

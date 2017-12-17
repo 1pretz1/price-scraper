@@ -22,10 +22,10 @@ class InitialWebScrape
                                )
   end
 
-  def product_url_check
+  def product_website
     ProductWebsite.all.select do |saved_website|
       product.product_url.include?(saved_website.website_url)
-    end
+    end.first
   end
 
   def web_page
@@ -38,7 +38,7 @@ class InitialWebScrape
 
   def price_text
     if attributes[:price] == nil
-      web_page.css(product_url_check[0].product_price_name)[0].text
+      web_page.css(product_website.product_price_name).text
     else
       attributes[:price]
     end
@@ -49,7 +49,6 @@ class InitialWebScrape
   end
 
   def get_info
-    binding.pry
     attributes[:title] = web_page.at('meta[property="og:title"]')['content']
     attributes[:description] = web_page.at('meta[property="og:description"]')['content']
     attributes[:image] = web_page.at('meta[property="og:image"]')['content']

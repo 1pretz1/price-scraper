@@ -23,6 +23,7 @@
 
 .product_li {
   margin:0 0 5.5px 0;
+  color: black;
 }
 
 div.div_img {
@@ -47,19 +48,32 @@ img {
   display: inline-block;
 }
 
+.product_list_div:hover {
+  border-radius: 20px;
+  background-color: #e9e9e9;
+}
+
 h1.product_list_header {
   padding: 30px;
-  font-size: 2em;
+  font-size: 30px;
   margin: 0 auto;
 }
 
 .product_item_header {
-   border-radius: 20px;
-   margin: 0 auto;
-   text-align: center;
-   border:3.5px solid black;
-   margin-left: 30%;
-   margin-right: 30%;
-   margin-top: 2%;
-   margin-bottom: 1.5%;
+  padding-bottom: 3px;
+  font-size: 2em;
+  overflow:hidden;
+  border-radius: 20px;
+  margin: 0 auto;
+  text-align: center;
+  border:3.5px solid black;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2%;
+  margin-bottom: 1.5%;
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <script>
       $(document).ready(function () {
         $(function () {
@@ -25,7 +26,6 @@
           <a class="navbar-brand" href="/">Price Monitor</a></li>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
           <% if current_user %>
             <li>
             <%= link_to current_user.email, user_path(current_user.id) %>
@@ -58,5 +58,10 @@
       </nav>
     </div>
     <%= yield %>
+
+    <footer>
+      <p>Created by: Peter Hartshorn</p>
+    </footer>
+
   </body>
 </html>
