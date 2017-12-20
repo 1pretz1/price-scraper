@@ -2,7 +2,7 @@ require 'open-uri'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :admin?, :url_host
+  helper_method :current_user, :admin?, :url_host, :call_check_price_scrape
 
   def url_host(url)
     URI(url).host

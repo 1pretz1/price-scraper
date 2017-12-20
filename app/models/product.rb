@@ -13,4 +13,10 @@ class Product < ApplicationRecord
       image_url: image_url,
     )
   end
+
+  def self.save_sale_price(product:, sale_price:)
+    product.update_attributes(
+      sale_price: sale_price
+    )
+  end
 end

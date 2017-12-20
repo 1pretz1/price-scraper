@@ -1,9 +1,10 @@
 class InitialWebScrape
-  attr_accessor :product, :user_agent, :attributes
+  attr_accessor :page, :product, :user_agent, :attributes
 
   def initialize(product:)
     @product = product
     @user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
+    @page = Nokogiri::XML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
     @attributes = {}
   end
 
@@ -22,38 +23,27 @@ class InitialWebScrape
                                )
   end
 
-  def product_website
-    ProductWebsite.all.select do |saved_website|
-      product.product_url.include?(saved_website.website_url)
-    end.first
-  end
-
-  def web_page
-    Nokogiri::XML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
-  end
-
-  def product_header
-    web_page.css('h1')[0].text
-  end
-
-  def price_text
-    if attributes[:price] == nil
-      web_page.css(product_website.product_price_name).text
-    else
-      attributes[:price]
-    end
-  end
-
   def correct_price_format
-    price_text.gsub(/([^0-9.])/, "")
+    attributes[:price] = attributes[:price].gsub(/([^0-9.])/, "")
   end
 
   def get_info
-    attributes[:title] = web_page.at('meta[property="og:title"]')['content']
-    attributes[:description] = web_page.at('meta[property="og:description"]')['content']
-    attributes[:image] = web_page.at('meta[property="og:image"]')['content']
-    if web_page.at('meta[property="og:price:amount"]') != nil
-      attributes[:price] = web_page.at('meta[property="og:price:amount"]')['content']
+    attributes[:title] = page.at('meta[property="og:title"]')['content']
+    attributes[:description] = page.at('meta[property="og:description"]')['content']
+    attributes[:image] = page.at('meta[property="og:image"]')['content']
+    get_price
+  end
+
+  def get_price
+    page.remove_namespaces!
+    if page.xpath('//meta[contains(@property,"price")]') != nil
+      attributes[:price] = page.xpath('//meta[contains(@property,"price")]/@content').text
+    else product.product_website.product_price_name != nil
+      attributes[:price] = page.xpath(product.product_website.product_price_name).text
     end
   end
 end
+
+#  def product_header
+#    page.css('h1').text
+#  end
