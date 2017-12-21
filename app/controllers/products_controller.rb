@@ -29,8 +29,4 @@ end
   def product_params
     params.require(:product).permit(:product_url)
   end
-
-  def call_check_price_scrape
-    CheckPriceScrape
-  end
 end

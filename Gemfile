@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'awesome_print'
-gem 'httparty'
 gem 'nokogiri'
 gem 'valid_url'
 gem 'bcrypt', '~> 3.1.7'

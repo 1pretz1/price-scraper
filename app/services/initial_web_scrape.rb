@@ -16,15 +16,15 @@ class InitialWebScrape
     get_info
     Product.save_product_attributes(
                                 product: product,
-                                price: correct_price_format,
+                                price: attributes[:price],
                                 name: attributes[:title],
                                 description: attributes[:description],
                                 image_url: attributes[:image],
                                )
   end
 
-  def correct_price_format
-    attributes[:price] = attributes[:price].gsub(/([^0-9.])/, "")
+  def correct_price_format(price)
+    price = price.gsub(/([^0-9.])/, "")
   end
 
   def get_info
@@ -36,11 +36,12 @@ class InitialWebScrape
 
   def get_price
     page.remove_namespaces!
-    if page.xpath('//meta[contains(@property,"price")]') != nil
-      attributes[:price] = page.xpath('//meta[contains(@property,"price")]/@content').text
+    if page.xpath('//meta[contains(@property,"price:amount")]') != nil
+      attributes[:price] = page.xpath('//meta[contains(@property,"price:amount")]/@content').text
     else product.product_website.product_price_name != nil
       attributes[:price] = page.xpath(product.product_website.product_price_name).text
     end
+    correct_price_format(attributes[:price])
   end
 end
 
