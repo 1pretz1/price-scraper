@@ -8,7 +8,7 @@ class ProductWebsitesController < ApplicationController
     @product_website = ProductWebsite.create(product_website_params)
     if @product_website.save
       redirect_to '/productwebsites/new'
-      flash[:success] = "Product website has been saved"
+      flash[:success] = "'#{@product_website.website_url}' has been saved"
     else
       render '/productwebsites/new'
     end

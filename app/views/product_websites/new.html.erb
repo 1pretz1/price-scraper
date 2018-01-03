@@ -15,9 +15,8 @@
 
   <%= form_for :product_website do |f| %>
     Website URL:<br> <%= f.text_field :website_url %></br>
-    Product price tag:<br> <%= f.text_field :product_price_name, :value => '.' %></br>
-    Sale price tag:<br> <%= f.text_field :now_price_name, :value => '.' %></br>
-    Original price tag:<br> <%= f.text_field :was_price_name, :value => '.' %></br>
+    Product price tag:<br> <%= f.text_field :product_price_name %></br>
+    Sale price tag:<br> <%= f.text_field :now_price_name %></br>
     <%= f.submit "Submit" %>
   <% end %>
 </div>

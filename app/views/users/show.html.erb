@@ -10,6 +10,11 @@
   </strong>
 </h1>
 
+<div align='center'>
+  <%= link_to "Click to check products prices", web_scrapes_path, method: "post", class: "btn btn-default" %></br>
+  (May take upto a minute)
+</div>
+
 <% @orders.each do |website, product| %>
   <div class='container'>
     <h2 class='product_item_header'><%= website %></h2>
@@ -19,6 +24,11 @@
           <div class='product_list_div'>
             <li class='product_li'><strong><%= each_product.name %></li>
               <li class='product_li'><strong>£<%= each_product.price %></strong></li>
+              <% if each_product.sale_price != nil %>
+                <li class='sale_price_li'>
+                  SALE: £<%= each_product.sale_price %>
+                </li>
+              <% end %>
               <li class='product_li'><%= image_tag(each_product.image_url) %></li>
             </div>
           <% end %>
