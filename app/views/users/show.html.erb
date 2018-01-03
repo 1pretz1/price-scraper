@@ -4,7 +4,7 @@
   </div>
 <% end %>
 
-<h1 class='product_list_header' align='center'>
+<h1 class='welcome_header' align='center'>
   <strong>
     Hey <%= current_user.email %>, these are your items being tracked...
   </strong>
@@ -13,7 +13,7 @@
 <% @orders.each do |website, product| %>
   <div class='container'>
     <h2 class='product_item_header'><%= website %></h2>
-    <ul align='center' style="list-style-type: none">
+    <ul class='product_list_ul' align='center' style="list-style-type: none">
       <% product.each do |each_product| %>
         <%= link_to(each_product.product_url, target: :_blank) do %>
           <div class='product_list_div'>

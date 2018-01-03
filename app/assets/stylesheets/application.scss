@@ -21,9 +21,59 @@
   margin: 0 auto;
 }
 
+.welcome_header {
+  padding: 30px;
+  font-size: 30px;
+  margin: 0 auto;
+}
+
+<<<<<<< Updated upstream
+div.div_img {
+  width: 100%;
+  display: block;
+=======
+.product_item_header {
+  padding-bottom: 3px;
+  font-size: 2em;
+  overflow:hidden;
+  border-radius: 20px;
+  margin: 0 auto;
+  text-align: center;
+  border:3.5px solid #333333;
+  font-weight: 700;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2%;
+  margin-bottom: 1.5%;
+  color: #333333;
+>>>>>>> Stashed changes
+}
+
+.product_list_ul {
+  padding: 0px;
+}
+
+.product_list_div {
+  padding: 10px;
+  height: 400px;
+  width: 400px;
+  overflow:hidden;
+  display: inline-block;
+}
+
+.product_list_div:hover {
+  border-radius: 20px;
+  background-color: #e9e9e9;
+}
+
 .product_li {
   margin:0 0 5.5px 0;
   color: black;
+}
+
+.sale_price_li {
+  font-size: 2em;
+  color: red;
 }
 
 div.div_img {
@@ -40,40 +90,10 @@ img {
   border-radius: 20px;
 }
 
-.product_list_div {
-  padding: 10px;
-  height: 400px;
-  width: 400px;
-  overflow:hidden;
-  display: inline-block;
-}
-
-.product_list_div:hover {
-  border-radius: 20px;
-  background-color: #e9e9e9;
-}
-
-h1.product_list_header {
-  padding: 30px;
-  font-size: 30px;
-  margin: 0 auto;
-}
-
-.product_item_header {
-  padding-bottom: 3px;
-  font-size: 2em;
-  overflow:hidden;
-  border-radius: 20px;
-  margin: 0 auto;
-  text-align: center;
-  border:3.5px solid black;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 2%;
-  margin-bottom: 1.5%;
-}
-
-footer {
+.footer_p {
+  font-color: black;
+  font-size: 19px;
   padding: 20px;
+  margin: 30px;
   text-align: center;
 }
