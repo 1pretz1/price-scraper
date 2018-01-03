@@ -15,6 +15,7 @@ def create
     flash[:success] = "'#{@product.name}' has been saved"
   else
     render 'new'
+    flash[:error] = "Unable to save that shite!"
   end
 end
 

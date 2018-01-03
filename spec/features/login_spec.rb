@@ -8,7 +8,7 @@ feature 'User signs in' do
     fill_in 'email', with: user.email
     fill_in 'password', with: user.password
     click_button 'Submit'
-    expect(page).to have_content "This is my web scraper Home page"
+    expect(page).to have_content "Price Monitoring Instructions:"
   end
 
   scenario 'with invalid credentials' do

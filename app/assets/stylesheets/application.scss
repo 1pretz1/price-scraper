@@ -13,6 +13,21 @@
  */
 @import "bootstrap";
 
+.alert {
+  margin: 0px;
+}
+
+.instruction_li {
+  font-size:30px;
+  padding: 0px;
+}
+
+.arrow_img {
+  height: 60px;
+  width: 60px;
+  margin: 10px;
+}
+
 .container {
   padding: 0px;
 }
@@ -21,10 +36,11 @@
   margin: 0 auto;
 }
 
-.welcome_header {
+h1 {
   padding: 30px;
   font-size: 30px;
   margin: 0 auto;
+  font-weight: bold;
 }
 
 .sale_price_li {
@@ -85,7 +101,7 @@ div.div_img {
   display: block;
 }
 
-img {
+.product_img {
   display:inline-block;
   max-width:400px;
   max-height:300px;

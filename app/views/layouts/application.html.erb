@@ -58,10 +58,16 @@
       </div>
       </nav>
     </div>
+    <% flash.each do |key, value| %>
+      <div align='center' class="<%= flash_class(key) %>">
+        <%= value %>
+      </div>
+    <% end %>
+
     <%= yield %>
 
     <footer>
-      <p class='footer_p'>Created by: Peter Hartshorn</p>
+    <p class='footer_p'>Created by: Peter Hartshorn</p>
     </footer>
 
   </body>

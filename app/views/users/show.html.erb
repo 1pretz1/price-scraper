@@ -1,13 +1,5 @@
-<% flash.each do |key, value| %>
-  <div align='center' class="<%= flash_class(key) %>">
-    <%= value %>
-  </div>
-<% end %>
-
-<h1 class='welcome_header' align='center'>
-  <strong>
-    Hey <%= current_user.email %>, these are your items being tracked...
-  </strong>
+<h1 align='center'>
+  Hey <%= current_user.email %>, these are your items being tracked...
 </h1>
 
 <div align='center'>
@@ -29,7 +21,7 @@
                   SALE: £<%= each_product.sale_price %>
                 </li>
               <% end %>
-              <li class='product_li'><%= image_tag(each_product.image_url) %></li>
+              <li class='product_li'><%= image_tag(each_product.image_url, class: "product_img") %></li>
             </div>
           <% end %>
         <% end %>

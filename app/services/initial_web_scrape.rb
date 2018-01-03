@@ -44,7 +44,3 @@ class InitialWebScrape
     correct_price_format(attributes[:price])
   end
 end
-
-#  def product_header
-#    page.css('h1').text
-#  end
