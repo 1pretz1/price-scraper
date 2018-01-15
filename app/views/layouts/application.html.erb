@@ -3,23 +3,13 @@
   <head>
     <link rel="icon" type="image/png" href="/assets/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=0.7">
-    <script>
-      $(document).ready(function () {
-        $(function () {
-          $('li a').click(function (e) {
-            $('a').removeClass('active');
-            $(this).addClass('active');
-          });
-        });
-      });
-    </script>
-      <title>PriceScraper</title>
+    <title>PriceScraper</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <div class='page-bg'></div>
     <div class="navbar-outer">
       <nav class="navbar navbar-inverse">
       <div class="container-fluid">

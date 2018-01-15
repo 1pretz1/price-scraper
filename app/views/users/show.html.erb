@@ -4,18 +4,17 @@
 
 <div align='center'>
   <%= link_to "Click to check products prices", web_scrapes_path, method: "post", class: "btn btn-default" %></br>
-  (May take upto a minute)
 </div>
 
 <% @orders.each do |website, product| %>
   <div class='container'>
-    <h2 class='product_item_header'><%= website %></h2>
+   <h2 class='product_item_header'><%= website %></h2>
     <ul class='product_list_ul' align='center' style="list-style-type: none">
       <% product.each do |each_product| %>
         <%= link_to(each_product.product_url, target: :_blank) do %>
           <div class='product_list_div'>
-            <li class='product_li'><strong><%= each_product.name %></li>
-              <li class='product_li'><strong>£<%= each_product.price %></strong></li>
+            <li class='product_details_li'><strong><%= each_product.name %></li>
+              <li class='product_details_li'><strong>£<%= each_product.price %></strong></li>
               <% if each_product.sale_price != nil %>
                 <li class='sale_price_li'>
                   SALE: £<%= each_product.sale_price %>
