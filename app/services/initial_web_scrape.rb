@@ -18,7 +18,6 @@ class InitialWebScrape
                                 product: product,
                                 price: attributes[:price],
                                 name: attributes[:title],
-                                description: attributes[:description],
                                 image_url: attributes[:image],
                                )
   end
@@ -29,7 +28,6 @@ class InitialWebScrape
 
   def get_info
     attributes[:title] = page.at('meta[property="og:title"]')['content']
-    attributes[:description] = page.at('meta[property="og:description"]')['content']
     attributes[:image] = page.at('meta[property="og:image"]')['content']
     get_price
   end

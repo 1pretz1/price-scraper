@@ -6,11 +6,13 @@ class ProductsController < ApplicationController
   end
 
 def create
-  @product = current_user.products.new(product_params)
-  @product.product_website_id = product_website.id
-  @product.save
-  if @product.save
-    InitialWebScrape.call(product: @product)
+    @product = current_user.products.new(product_params)
+    if @product.product_website != nil
+      @product.product_website_id = product_website.id
+      InitialWebScrape.call(product: @product)
+    else
+      MetaWebScrape.call(product: @product)
+    end
     redirect_to "/users/#{current_user.id}"
     flash[:success] = "'#{@product.name}' has been saved"
   else
