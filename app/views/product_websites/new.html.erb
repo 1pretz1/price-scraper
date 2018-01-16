@@ -15,8 +15,10 @@
 
   <%= form_for :product_website do |f| %>
     Website URL:<br> <%= f.text_field :website_url %></br>
-    Product price tag:<br> <%= f.text_field :product_price_name %></br>
-    Sale price tag:<br> <%= f.text_field :now_price_name %></br>
+    Title:<br> <%= f.text_field :title_xpath, value: '//meta[contains(@property,"title")]/@content', maxlength: "41" %></br>
+    Image:<br> <%= f.text_field :image_xpath, value: '//meta[contains(@property,"image")]/@content', maxlength: "41" %></br>
+    Product price tag:<br> <%= f.text_field :price_xpath, value: '//meta[contains(@property,"price:amount")]/@content', maxlength: "47" %></br>
+    Sale price tag:<br> <%= f.text_field :sale_price_xpath, value: '//meta[contains(@property,"price:amount")]/@content', maxlength: "47" %></br>
     <%= f.submit "Submit" %>
   <% end %>
 </div>

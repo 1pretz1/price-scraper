@@ -1,0 +1,54 @@
+class MetaInitialWebScrape < InitialWebScrape
+
+  def has_price?
+    if page.xpath('//meta[contains(@property,"price:amount")]/@content').text != nil
+      attributes[:price] = page.xpath('//meta[contains(@property,"price:amount")]/@content').text
+      has_title?
+    else
+      flash[:error] = "Invalid Product, no price scraped"
+      redirect_to product_path
+    end
+  end
+
+  def has_title?
+    if page.xpath('//meta[contains(@property,"title")]/@content').text != nil
+      attributes[:title] = page.xpath('//meta[contains(@property,"title")]/@content').text
+      has_image?
+    else
+      flash[:error] = "Invalid Product, no title scraped"
+      redirect_to product_path
+    end
+  end
+
+  def has_image?
+    if page.xpath('//meta[contains(@property,"image")]/@content').text != nil
+      attributes[:image] = page.xpath('//meta[contains(@property,"image")]/@content').text
+    else
+      flash[:error] = "Invalid Product, no image scraped"
+      redirect_to product_path
+    end
+  end
+
+  def get_website_info
+    new_website[:website_url] = url_host(product.product_url)
+    new_website[:price_xpath] = '//meta[contains(@property,"price:amount")]/@content'
+    new_website[:sale_price_xpath] = '//meta[contains(@property,"price:amount")]/@content'
+    new_website[:image_xpath] = '//meta[contains(@property,"image")]/@content'
+    new_website[:title_xpath] = '//meta[contains(@property,"title")]/@content'
+    save_website
+  end
+
+  def save_website
+    ProductWebsite.add_website(
+      website_url: new_webiste[:website_url],
+      price_xpath: new_website[:price_xpath],
+      sale_price_xpath: new_website[:sale_price_xpath],
+      image_xpath: new_website[:image_xpath],
+      title_xpath: new_website[:title_xpath]
+    )
+  end
+
+  def url_host(url)
+    URI(url).host
+  end
+end
