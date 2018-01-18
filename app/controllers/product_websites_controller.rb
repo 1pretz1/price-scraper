@@ -7,9 +7,10 @@ class ProductWebsitesController < ApplicationController
   def create
     @product_website = ProductWebsite.create(product_website_params)
     if @product_website.save
-      redirect_to '/productwebsites/new'
       flash[:success] = "'#{@product_website.website_url}' has been saved"
+      redirect_to '/productwebsites/new'
     else
+      flash[:error] = "'#{@product_website.website_url}' can't be saved"
       render '/productwebsites/new'
     end
   end
@@ -17,7 +18,7 @@ class ProductWebsitesController < ApplicationController
   private
 
   def product_website_params
-    params.require(:product_website).permit(:website_url, :product_price_name, :now_price_name)
+    params.require(:product_website).permit(:website_url, :price_xpath, :sale_price_xpath, :title_xpath, :image_xpath)
   end
 
 end

@@ -12,27 +12,15 @@ attr_accessor :page, :product_url, :new_website
   end
 
   def call
-    has_price?
+    has_info?
   end
 
-  def has_price?
-    if page.xpath('//meta[contains(@property,"price:amount")]/@content').text.present?
-      has_title?
-    else
-    end
-  end
-
-  def has_title?
-    if page.xpath('//meta[contains(@property,"title")]/@content').text.present?
-      has_image?
-    else
-    end
-  end
-
-  def has_image?
-    if page.xpath('//meta[contains(@property,"image")]/@content').text.present?
+  def has_info?
+    page.remove_namespaces!
+    if page.xpath('//meta[contains(@property,"price:amount")]/@content').text.present? &&
+      page.xpath('//meta[contains(@property,"title")]/@content').text.present? &&
+      page.xpath('//meta[contains(@property,"image")]/@content').text.present?
       get_website_info
-    else
     end
   end
 

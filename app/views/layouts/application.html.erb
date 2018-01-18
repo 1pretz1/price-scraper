@@ -34,14 +34,14 @@
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li>
-            <%= link_to(raw('<span class="glyphicon glyphicon-log-out">Log out</span>'), '/logout')  %>
+            <%= link_to(raw('<span>Log out</span>'), '/logout')  %>
             </li>
           <% else %>
             <li>
-            <%= link_to(raw('<span class="glyphicon glyphicon-user">Sign up</span>'), new_user_path)  %>
+            <%= link_to(raw('<span>Sign up</span>'), new_user_path)  %>
             </li>
             <li>
-            <%= link_to(raw('<span class="glyphicon glyphicon-log-in">Login</span>'), '/login') %>
+            <%= link_to(raw('<span>Login</span>'), '/login') %>
             </li>
           <% end %>
         </ul>
