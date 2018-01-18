@@ -40,8 +40,6 @@ attr_accessor :page, :product_url, :new_website
       sale_price_xpath: new_website[:sale_price_xpath],
       image_xpath: new_website[:image_xpath],
       title_xpath: new_website[:title_xpath],
-      page: page,
-      product_url: product_url
     )
   end
 
