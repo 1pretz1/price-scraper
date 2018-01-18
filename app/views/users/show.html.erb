@@ -8,7 +8,7 @@
 
 <% @orders.each do |website, product| %>
   <div class='container'>
-   <h2 class='product_item_header'><%= website %></h2>
+    <h2 class='product_item_header'><%= website %></h2>
     <ul class='product_list_ul' align='center' style="list-style-type: none">
       <% product.each do |each_product| %>
         <%= link_to(each_product.product_url, target: :_blank) do %>
@@ -17,13 +17,13 @@
               <li class='product_details_li'><strong>£<%= each_product.price %></strong></li>
               <% if each_product.sale_price != nil %>
                 <li class='sale_price_li'>
-                  SALE: £<%= each_product.sale_price %>
+                SALE: £<%= each_product.sale_price %>
                 </li>
               <% end %>
               <li class='product_li'><%= image_tag(each_product.image_url, class: "product_img") %></li>
             </div>
           <% end %>
         <% end %>
-    </ul>
-  </div>
-<% end %>
+      </ul>
+    </div>
+  <% end %>

@@ -1,9 +1,3 @@
-<% flash.each do |key, value| %>
-  <div align='center' class="<%= flash_class(key) %>">
-    <%= value %>
-  </div>
-<% end %>
-
 <div align='center'>
   <% if @product_website.errors.any? %>
     <% @product_website.errors.full_messages.each do |message| %>
@@ -13,7 +7,7 @@
 
   <h1 align='center'>Add new website</h1>
 
-  <%= form_for :product_website do |f| %>
+  <%= form_for :product_website, url: { action: "create" }, method: "post" do |f| %>
     Website URL:<br> <%= f.text_field :website_url %></br>
     Title:<br> <%= f.text_field :title_xpath, value: '//meta[contains(@property,"title")]/@content', maxlength: "41" %></br>
     Image:<br> <%= f.text_field :image_xpath, value: '//meta[contains(@property,"image")]/@content', maxlength: "41" %></br>
