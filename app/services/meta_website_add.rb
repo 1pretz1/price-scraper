@@ -34,7 +34,7 @@ attr_accessor :page, :product_url, :new_website
   end
 
   def save_website
-    ProductWebsite.add_website(
+    ProductWebsite.create(
       website_url: new_website[:website_url],
       price_xpath: new_website[:price_xpath],
       sale_price_xpath: new_website[:sale_price_xpath],

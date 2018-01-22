@@ -14,7 +14,7 @@ class InitialWebScrape
 
   def call
     get_info
-    Product.save_product(
+    user.products.create(
       user: user,
       product_url: product_url,
       price: attributes[:price],
