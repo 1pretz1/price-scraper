@@ -1,4 +1,4 @@
-<h1 align='center'>Sign up page</h1>
+<h1 align='center'>Sign up</h1>
 
 <div align='center'>
   <% if @user.errors.any? %>
@@ -8,9 +8,9 @@
   <% end %>
 
   <%= form_for :user, url: { action: "create" }, method: "post" do |f| %>
-    Email:<br> <%= f.text_field :email %></br>
-    Password:<br> <%= f.password_field :password %></br>
-    Password Confirmation:<br> <%= f.password_field :password_confirmation %></br>
+    Email<br> <%= f.text_field :email %></br>
+    Password<br> <%= f.password_field :password %></br>
+    Password Confirmation<br> <%= f.password_field :password_confirmation %></br>
     <%= f.submit %>
   <% end %>
 </div>

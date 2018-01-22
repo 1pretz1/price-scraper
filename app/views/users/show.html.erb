@@ -15,11 +15,11 @@
           <div class='product_list_div'>
             <li class='product_details_li'><strong><%= each_product.name %></li>
               <li class='product_details_li'><strong>£<%= each_product.price %></strong></li>
-              <% if each_product.sale_price != nil %>
-                <li class='sale_price_li'>
+              <li class='sale_price_li'>
+              <% if each_product.sale_price.present? %>
                 SALE: £<%= each_product.sale_price %>
-                </li>
               <% end %>
+              </li>
               <li class='product_li'><%= image_tag(each_product.image_url, class: "product_img") %></li>
             </div>
           <% end %>
