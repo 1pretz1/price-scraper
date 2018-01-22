@@ -22,11 +22,11 @@
             <%= link_to current_user.email, user_path(current_user.id) %>
             </li>
             <li>
-            <%= link_to "New URL", product_path %>
+            <%= link_to "New URL", new_product_path %>
             </li>
             <% if admin? %>
               <li>
-              <%= link_to "Add new website", productwebsites_new_path %>
+              <%= link_to "Add new website", new_product_website_path %>
               </li>
             <% end %>
           <% end %>
