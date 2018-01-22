@@ -34,7 +34,12 @@ private
 
   def page_scrape
     user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
-    Nokogiri::XML(open(product_url,'User-Agent' => user_agent), nil,"UTF-8")
+    begin
+      Nokogiri::XML(open(product_url,'User-Agent' => user_agent), nil,"UTF-8")
+    rescue TypeError
+      flash[:error] = "URL can't be found!"
+      redirect_to new_product_path
+    end
   end
 
   def product_saved?
