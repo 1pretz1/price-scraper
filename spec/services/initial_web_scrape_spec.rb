@@ -2,7 +2,9 @@ describe InitialWebScrape do
 
   before do
     product = FactoryGirl.create(:product)
-    @iws = InitialWebScrape.new(product: product)
+    user = FactoryGirl.create(:user)
+    page = FactoryGirl.create(:page)
+    @iws = InitialWebScrape.new(product: product, page: page, user: user)
   end
 
   it "correctly formats the price ready for inputting in Products" do
