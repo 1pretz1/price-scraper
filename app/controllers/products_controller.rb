@@ -48,7 +48,7 @@ private
   end
 
   def product_saved?
-    if current_user.products.last.product_url == product_url
+    if current_user.products.last.save
       flash[:success] = "'#{current_user.products.last.name}' has been saved"
       redirect_to "/users/#{current_user.id}"
     else

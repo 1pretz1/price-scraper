@@ -24,13 +24,15 @@ class InitialWebScrape
     )
   end
 
- def get_info
+  def get_info
     page.remove_namespaces!
     attributes[:title] = page.xpath(return_website.title_xpath).text
     attributes[:image] = page.xpath(return_website.image_xpath).text
-    attributes[:price] = page.xpath(return_website.price_xpath).text
     attributes[:product_website_id] = return_website.id
-    correct_price_format(attributes[:price])
+    if page.xpath(return_website.price_xpath).text.present?
+      attributes[:price] = page.xpath(return_website.price_xpath).text
+      correct_price_format(attributes[:price])
+    end
   end
 
   def correct_price_format(price)

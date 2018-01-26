@@ -1,10 +1,10 @@
-<div align='center'>
-  <%= link_to "Click to check products prices", web_scrapes_path, method: "post", class: "btn btn-default" %></br>
+<div align='center' class='check_price_button'>
+  <%= link_to image_tag("refresh.png", class: "refresh_img"),web_scrapes_path, method: "post" %></br>
 </div>
 
 <% @orders.each do |website, product| %>
   <div class='container'>
-    <h2 class='product_item_header'><%= website %></h2>
+    <h2 class='product_item_header'><%= brand(website) %></h2>
     <ul class='product_list_ul' align='center' style="list-style-type: none">
       <% product.each do |each_product| %>
         <%= link_to(each_product.product_url, target: :_blank) do %>

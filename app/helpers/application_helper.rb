@@ -8,4 +8,9 @@ module ApplicationHelper
     when 'alert' then "alert alert-danger"
     end
   end
+
+  def brand(website)
+    website.split('.')[1].capitalize
+  end
+
 end

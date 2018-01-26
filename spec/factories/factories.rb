@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :page do
+  #factory :page do
 
   factory :user do
     email "peter"
