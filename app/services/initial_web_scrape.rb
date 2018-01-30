@@ -1,7 +1,8 @@
 class InitialWebScrape
-  attr_accessor :user, :product_url, :page, :attributes
+  attr_accessor :user, :product_url, :page, :attributes, :website
 
-  def initialize(product_url:, page:, user:)
+  def initialize(product_url:, page:, user:, website:)
+    @website = website
     @user = user
     @product_url = product_url
     @page = page
@@ -25,23 +26,26 @@ class InitialWebScrape
   end
 
   def get_info
-    page.remove_namespaces!
-    attributes[:title] = page.xpath(return_website.title_xpath).text
-    attributes[:image] = page.xpath(return_website.image_xpath).text
-    attributes[:product_website_id] = return_website.id
-    if page.xpath(return_website.price_xpath).text.present?
-      attributes[:price] = page.xpath(return_website.price_xpath).text
-      correct_price_format(attributes[:price])
+    attributes[:title] = page.xpath(website.title_xpath).text
+    attributes[:image] = page.xpath(website.image_xpath).text
+    attributes[:product_website_id] = website.id
+    if page.xpath(website.price_xpath).text.present?
+      price = page.xpath(website.price_xpath).text
+      attributes[:price] = correct_price_format(price)
     end
   end
 
   def correct_price_format(price)
-    price = price.gsub(/([^0-9.])/, "")
-  end
-
-  def return_website
-    ProductWebsite.all.select do |saved_website|
-      product_url.include?(saved_website.website_url)
-    end.first
+    if price.include?('.')
+      element = price.split(" ").select { |element| element.include?('.') }.join
+      element.gsub(/([^0-9.])/, "")
+    elsif price.include?("£")
+      element = price.split(" ").select do |x|
+        x.include?("£")
+      end.join
+      element.gsub(/([^0-9.])/, "")
+    else
+      price.gsub(/([^0-9.])/, "")
+    end
   end
 end

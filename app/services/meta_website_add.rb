@@ -1,5 +1,6 @@
 class MetaWebsiteAdd
-attr_accessor :page, :product_url, :new_website
+  include ApplicationHelper
+  attr_accessor :page, :product_url, :new_website
 
   def initialize(product_url:, page:)
     @product_url = product_url
@@ -16,7 +17,6 @@ attr_accessor :page, :product_url, :new_website
   end
 
   def has_info?
-    page.remove_namespaces!
     if page.xpath('//meta[contains(@property,"price:amount")]/@content').text.present? &&
       page.xpath('//meta[contains(@property,"title")]/@content').text.present? &&
       page.xpath('//meta[contains(@property,"image")]/@content').text.present?
@@ -42,9 +42,4 @@ attr_accessor :page, :product_url, :new_website
       title_xpath: new_website[:title_xpath]
     )
   end
-
-  def url_host(url)
-    URI(url).host
-  end
 end
-

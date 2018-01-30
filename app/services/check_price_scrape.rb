@@ -1,4 +1,5 @@
 class CheckPriceScrape < InitialWebScrape
+  include ApplicationHelper
   attr_accessor :user_agent, :user
 
   def initialize(user:)
@@ -16,7 +17,7 @@ class CheckPriceScrape < InitialWebScrape
 
   def products_scrape
     user.products.all.each do |product|
-      page = Nokogiri::XML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
+      page = Nokogiri::HTML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
       get_price(product: product, page: page)
     end
   end

@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :admin?, :url_host
-
-  def url_host(url)
-    URI(url).host
-  end
+  helper_method :current_user, :admin?
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
