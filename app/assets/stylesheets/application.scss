@@ -170,6 +170,7 @@ h1 {
 //EACH-PRODUCT-INFORMATION
 
 .product_list_div {
+  max-width: 425px;
   padding-right: 50px;
   padding-left: 50px;
   padding-top: 10px;
@@ -184,7 +185,12 @@ h1 {
   padding: 0px;
 }
 
-.product_details_li {
+.product_name_li {
+  margin:0;
+  color: black;
+}
+
+.product_price_li {
   margin:0;
   color: black;
 }

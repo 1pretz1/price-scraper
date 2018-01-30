@@ -9,8 +9,8 @@
       <% product.each do |each_product| %>
         <%= link_to(each_product.product_url, target: :_blank) do %>
           <div class='product_list_div'>
-            <li class='product_details_li'><strong><%= each_product.name %></li>
-              <li class='product_details_li'><strong>£<%= each_product.price %></strong></li>
+            <li class='product_name_li'><strong><%= each_product.name %></li>
+              <li class='product_price_li'><strong>£<%= each_product.price %></strong></li>
               <li class='sale_price_li'>
               <% if each_product.sale_price.present? %>
                 SALE: £<%= each_product.sale_price %>

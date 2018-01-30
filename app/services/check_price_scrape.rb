@@ -26,12 +26,15 @@ class CheckPriceScrape < InitialWebScrape
     page.remove_namespaces!
     sale_price = page.xpath(product.product_website.sale_price_xpath).text
     if sale_price.present?
+      sale_price = correct_price_format(sale_price)
       compare_prices(sale_price: sale_price, product: product)
     end
   end
 
   def compare_prices(sale_price:, product:)
-    if correct_price_format(sale_price).to_f < product.price.to_f
+    if product.price.to_f > sale_price.to_f ||
+      product.sale_price.to_f > sale_price.to_f
+
       product.update_attributes(sale_price: sale_price)
     end
   end
