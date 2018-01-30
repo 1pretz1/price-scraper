@@ -12,4 +12,8 @@ module ApplicationHelper
   def brand(website)
     website.split('.')[1].capitalize
   end
+
+  def url_host(url)
+    URI(url).host
+  end
 end
