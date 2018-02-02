@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116103412) do
+ActiveRecord::Schema.define(version: 20180129172511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180116103412) do
     t.datetime "updated_at", null: false
     t.string "title_xpath"
     t.string "image_xpath"
+    t.boolean "price_ajax", default: false
   end
 
   create_table "products", force: :cascade do |t|

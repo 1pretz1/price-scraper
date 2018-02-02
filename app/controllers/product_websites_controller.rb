@@ -18,6 +18,6 @@ class ProductWebsitesController < ApplicationController
   private
 
   def product_website_params
-    params.require(:product_website).permit(:website_url, :price_xpath, :sale_price_xpath, :title_xpath, :image_xpath)
+    params.require(:product_website).permit(:website_url, :price_xpath, :sale_price_xpath, :title_xpath, :image_xpath, :price_ajax)
   end
 end

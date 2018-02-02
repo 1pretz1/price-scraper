@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'selenium-webdriver', '~> 3.8'
+gem 'chromedriver-helper', '~> 1.0'
+
 gem 'awesome_print'
 gem 'nokogiri'
 gem 'valid_url'
@@ -41,7 +44,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'pry'

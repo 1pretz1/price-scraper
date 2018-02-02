@@ -20,11 +20,18 @@ module ProductsHelper
   end
 
   def call_initial_scrape
-    InitialWebScrape.call(product_url: product_url,
-                          page: page_scrape,
-                          user: current_user,
-                          website: return_website
-                         )
+    if return_website.price_ajax == false
+      InitialWebScrape.call(product_url: product_url,
+                            page: page_scrape,
+                            user: current_user,
+                            website: return_website
+                           )
+    else
+      AjaxScrape.call(url: product_url,
+                      user: current_user,
+                      website: return_website
+                     )
+    end
   end
 
   def product_saved?

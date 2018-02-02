@@ -7,6 +7,7 @@
     Image:<br> <%= f.text_field :image_xpath, value: '//meta[contains(@property,"image")]/@content', maxlength: "41" %></br>
     Product price tag:<br> <%= f.text_field :price_xpath, value: '//meta[contains(@property,"price:amount")]/@content', maxlength: "47" %></br>
     Sale price tag:<br> <%= f.text_field :sale_price_xpath, value: '//meta[contains(@property,"price:amount")]/@content', maxlength: "47" %></br>
+    Ajax: <%= f.select :price_ajax, options_for_select(["True", "False"]) %><br><br>
     <%= f.submit "Submit" %>
   <% end %>
 </div>
