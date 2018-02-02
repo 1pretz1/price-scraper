@@ -15,6 +15,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 $sans: "Source Sans Pro", Helvetica, Arial, sans-serif;
 
+//BODY
+
+body {
+  font-family: $sans;
+}
+
 //HELP-PAGE
 
 .instruction_li {
@@ -81,11 +87,11 @@ nav ul li {
 
 nav ul li a {
   padding: 18px;
-  font: $sans;
   color: #8c8c8c;
   font-size: 18px;
   text-decoration: none;
   display: block;
+  font-weight: 420;
 }
 
 nav ul li a:hover {
@@ -108,7 +114,6 @@ h1 {
   padding: 30px;
   font-size: 30px;
   margin: 0 auto;
-  font: $sans;
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -185,19 +190,29 @@ h1 {
   padding: 0px;
 }
 
+.delete_product_li {
+}
+
+.delete_product_img {
+  width: 13px;
+  height: 13px;
+}
+
 .product_name_li {
   margin:0;
   color: black;
+  font-size: 15px;
 }
 
-.product_price_li {
+.price_li {
   margin:0;
   color: black;
-}
+  font-size: 15px;
 
-.sale_price_li {
-  font-size: 1.7em;
-  color: red;
+  span {
+    color: red;
+    font-weight: 700;
+  }
 }
 
 .product_img {

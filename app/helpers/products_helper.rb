@@ -3,10 +3,11 @@ require 'open-uri'
 module ProductsHelper
 
   def page_scrape
-    user_agent = "Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
+    user_agent = 'Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7)
+                 Gecko/2009021910 Firefox/3.0.7'
     begin
-      Nokogiri::HTML(open(product_url,'User-Agent' => user_agent), nil,"UTF-8")
-      .remove_namespaces!
+      Nokogiri::HTML(open(product_url, 'User-Agent' => user_agent), nil, 'UTF-8')
+              .remove_namespaces!
     rescue TypeError
       flash[:error] = "Page can't be found!"
       redirect_to new_product_path
@@ -24,13 +25,11 @@ module ProductsHelper
       InitialWebScrape.call(product_url: product_url,
                             page: page_scrape,
                             user: current_user,
-                            website: return_website
-                           )
+                            website: return_website)
     else
       AjaxScrape.call(url: product_url,
                       user: current_user,
-                      website: return_website
-                     )
+                      website: return_website)
     end
   end
 
@@ -39,7 +38,7 @@ module ProductsHelper
       flash[:success] = "'#{current_user.products.last.name}' has been saved"
       redirect_to "/users/#{current_user.id}"
     else
-      flash[:error] = "Product could not be saved, try a different item!"
+      flash[:error] = 'Product could not be saved, try a different item!'
       redirect_to new_product_path
     end
   end

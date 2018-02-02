@@ -19,6 +19,7 @@ class AjaxScrape < InitialWebScrape
 
   def call
     get_info
+    save_info
   end
 
   def get_info
@@ -26,7 +27,6 @@ class AjaxScrape < InitialWebScrape
     attributes[:price] = correct_price_format(price)
 
     #META tags - attribute('content')
-
     attributes[:image] = driver.find_element(xpath: website.image_xpath)
                          .attribute('content')
     attributes[:title] = driver.find_element(xpath: website.title_xpath)

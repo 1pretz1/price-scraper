@@ -7,19 +7,31 @@
     <h2 class='product_item_header'><%= brand(website) %></h2>
     <ul class='product_list_ul' align='center' style="list-style-type: none">
       <% product.each do |each_product| %>
-        <%= link_to(each_product.product_url, target: :_blank) do %>
-          <div class='product_list_div'>
-            <li class='product_name_li'><strong><%= each_product.name %></li>
-              <li class='product_price_li'><strong>£<%= each_product.price %></strong></li>
-              <li class='sale_price_li'>
-              <% if each_product.sale_price.present? %>
-                SALE: £<%= each_product.sale_price %>
-              <% end %>
-              </li>
-              <li class='product_li'><%= image_tag(each_product.image_url, class: "product_img") %></li>
-            </div>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <div class='product_list_div'>
+          <li class: 'delete_product_li'>
+            <%= link_to image_tag('red-cross.png', class: "delete_product_img"),
+              product_path(each_product),
+              data: {confirm: "Are you sure you want to delete '#{each_product.name}' ?"},
+              method: 'delete'
+            %>
+            </li>
+            <li class='product_name_li'><strong><%= each_product.name %></strong></li>
+            <li class='price_li'>
+            <% if each_product.sale_price.present? %>
+              £<%= each_product.price %>
+              <span>SALE: £<%= each_product.sale_price %></span>
+            <% else %>
+              <strong>£<%= each_product.price %></strong>
+            <% end %>
+            </li>
+            <li class='product_li'>
+            <%= link_to image_tag(each_product.image_url, class: "product_img"),
+              each_product.product_url,
+              target: :_blank
+            %>
+            </li>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
