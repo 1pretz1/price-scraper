@@ -1,10 +1,10 @@
-class CheckPriceScrape < InitialWebScrape
+class CheckPricesScrape < InitialScrape
   include ApplicationHelper
-  attr_accessor :user_agent, :user
+  attr_accessor :user_agent, :check_price_params
 
-  def initialize(user:)
+  def initialize(check_price_params = {})
+    @check_price_params = check_price_params
     @user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
-    @user = user
   end
 
   def self.call(*args)
@@ -12,11 +12,16 @@ class CheckPriceScrape < InitialWebScrape
   end
 
   def call
-    products_scrape
+    #debate
+    if user == false
+      fetch_pages(check_price_params.fetch_values(:none_ajax_list, :method))
+    else
+      fetch_pages(user.products)
+    end
   end
 
-  def products_scrape
-    user.products.all.each do |product|
+  def fetch_pages(fetch_params = {})
+    fetch_param.all.each do |product|
       page = Nokogiri::HTML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
       get_price(product: product, page: page)
     end
