@@ -33,6 +33,12 @@ module ProductsHelper
     end
   end
 
+  def product_exists?
+    Product.all.select do |product|
+      product.product_url == new_product_url
+    end
+  end
+
   def product_saved?
     if current_user.products.last.save
       flash[:success] = "'#{current_user.products.last.name}' has been saved"
@@ -43,7 +49,7 @@ module ProductsHelper
     end
   end
 
-  def product_url
+  def new_product_url
     params[:product].values.first
   end
 end
