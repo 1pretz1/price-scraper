@@ -46,7 +46,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
-  gem 'pry'
+  gem 'pry-byebug'
   gem 'factory_girl_rails'
 end
 

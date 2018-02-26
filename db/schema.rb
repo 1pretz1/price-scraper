@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129172511) do
+ActiveRecord::Schema.define(version: 20180228103354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "product_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+  end
 
   create_table "product_websites", force: :cascade do |t|
     t.string "website_url"
@@ -28,7 +34,6 @@ ActiveRecord::Schema.define(version: 20180129172511) do
 
   create_table "products", force: :cascade do |t|
     t.string "product_url"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "price"
@@ -37,7 +42,11 @@ ActiveRecord::Schema.define(version: 20180129172511) do
     t.string "image_url"
     t.bigint "product_website_id"
     t.index ["product_website_id"], name: "index_products_on_product_website_id"
-    t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "products_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
   end
 
   create_table "users", force: :cascade do |t|
