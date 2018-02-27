@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :products
+  has_many :product_users
+  has_many :products, through: :product_users
 
   has_secure_password
   validates :email, :password, :password_confirmation, presence: true

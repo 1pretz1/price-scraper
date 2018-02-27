@@ -6,11 +6,18 @@ class ProductsController < ApplicationController
   def new; end
 
   def create
+    return save_product(existing_product) if existing_product.present?
     if return_website.blank?
-      MetaWebsiteAdd.call(product_url: product_url, page: page_scrape)
+      MetaWebsiteAdd.call(product_url: new_product_url, page: page_scrape)
     end
     if return_website.present?
       call_initial_scrape
+      #@product = call_initial_scrape
+      #if @product.save
+      #  ...
+      #else
+      #  ...
+      #end
       product_saved?
     else
       flash[:error] = 'Website not supported at this time!'
