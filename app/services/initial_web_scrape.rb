@@ -1,11 +1,11 @@
 class InitialWebScrape
   attr_accessor :user, :product_url, :page, :attributes, :website
 
-  def initialize(product_url:, page:, user:, website:)
+  def initialize(user:, product_url:, page:, website:)
     @website = website
-    @user = user
     @product_url = product_url
     @page = page
+    @user = user
     @attributes = {}
   end
 
@@ -15,14 +15,14 @@ class InitialWebScrape
 
   def call
     get_info
-    user.products.create(
-      user: user,
+    product = Product.create(
       product_url: product_url,
       price: attributes[:price],
       name: attributes[:title],
       image_url: attributes[:image],
       product_website_id: attributes[:product_website_id]
     )
+    user.product_users.create(user_id: user.id, product_id: product.id)
   end
 
   def get_info

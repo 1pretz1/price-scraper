@@ -1,15 +1,14 @@
 require 'selenium-webdriver'
 
 class AjaxScrape < InitialWebScrape
-  attr_accessor :driver, :website, :user, :attributes, :url
+  attr_accessor :driver, :website, :attributes, :url
 
-  def initialize(url:, user:, website:)
+  def initialize(url:, website:)
     options = Selenium::WebDriver::Chrome::Options.new(args: ['headless'])
     @driver = Selenium::WebDriver.for(:chrome, options: options)
     @url = url
     @driver.get(url)
     @website = website
-    @user = user
     @attributes = {}
   end
 
@@ -35,7 +34,7 @@ class AjaxScrape < InitialWebScrape
   end
 
   def save_info
-    user.products.create(
+    Product.create(
       product_url: url,
       price: attributes[:price],
       name: attributes[:title],
