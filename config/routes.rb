@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :products, only: [:new, :create, :destroy]
   resources :product_websites, only: [:new, :create]
-  resources :web_scrapes, only: :create
+  resources :user_prices_scrape, only: :create
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

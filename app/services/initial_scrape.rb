@@ -1,4 +1,4 @@
-class InitialWebScrape
+class InitialScrape
   attr_accessor :user, :product_url, :page, :attributes, :website
 
   def initialize(user:, product_url:, page:, website:)

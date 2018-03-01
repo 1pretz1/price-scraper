@@ -1,5 +1,6 @@
 <div align='center' class='check_price_button'>
-  <%= link_to image_tag("refresh.png", class: "refresh_img"),web_scrapes_path, method: "post" %></br>
+  <%= link_to image_tag("refresh.png", class: "refresh_img"),
+      user_prices_scrape_index_path, method: "post" %></br>
 </div>
 
 <% @orders.each do |website, product| %>

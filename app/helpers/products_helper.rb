@@ -4,20 +4,21 @@ module ProductsHelper
 
   def page_scrape
     user_agent = 'Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7)
-                 Gecko/2009021910 Firefox/3.0.7'
+                  Gecko/2009021910 Firefox/3.0.7'
     Nokogiri::HTML(open(new_product_url, 'User-agent' => user_agent), nil, 'UTF-8')
       .remove_namespaces!
   end
 
   def call_initial_scrape(page)
     if return_website.price_ajax == false
-      InitialWebScrape.call(product_url: new_product_url,
-                            page: page,
-                            website: return_website,
-                            user: current_user)
+      InitialScrape.call(product_url: new_product_url,
+                         page: page,
+                         user: current_user,
+                         website: return_website)
     else
-      AjaxScrape.call(url: product_url,
-                      website: return_website)
+      InitialAjaxScrape.call(url: new_product_url,
+                             user: current_user,
+                             website: return_website)
     end
   end
 
