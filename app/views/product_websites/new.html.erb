@@ -2,12 +2,12 @@
   <h1 align='center'>Add new website</h1>
 
   <%= form_for :product_website, url: { action: "create" }, method: "post" do |f| %>
-    Website URL:<br> <%= f.text_field :website_url %></br>
-    Title:<br> <%= f.text_field :title_xpath, value: '//meta[contains(@property,"title")]/@content', maxlength: "41" %></br>
-    Image:<br> <%= f.text_field :image_xpath, value: '//meta[contains(@property,"image")]/@content', maxlength: "41" %></br>
-    Product price tag:<br> <%= f.text_field :price_xpath, value: '//meta[contains(@property,"price:amount")]/@content', maxlength: "47" %></br>
-    Sale price tag:<br> <%= f.text_field :sale_price_xpath, value: '//meta[contains(@property,"price:amount")]/@content', maxlength: "47" %></br>
-    Ajax: <%= f.select :price_ajax, options_for_select(["True", "False"]) %><br><br>
+    Website URL:<br> <%= f.text_field :website_url, maxlength: "45" %></br>
+    Title:<br> <%= f.text_field :title_xpath, maxlength: "45" %></br>
+    Image:<br> <%= f.text_field :image_xpath, maxlength: "45" %></br>
+    Product price tag:<br> <%= f.text_field :price_xpath, maxlength: "45" %></br>
+    Sale price tag:<br> <%= f.text_field :sale_price_xpath, maxlength: "45" %></br>
+    Ajax: <%= f.select :price_ajax, options_for_select(['False', 'True']) %><br><br>
     <%= f.submit "Submit" %>
   <% end %>
 </div>

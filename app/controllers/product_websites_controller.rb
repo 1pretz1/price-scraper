@@ -1,10 +1,12 @@
 class ProductWebsitesController < ApplicationController
 
-  def new; end
+  def new
+    @product_website = ProductWebsite.new
+  end
 
   def create
-    product_website = ProductWebsite.create(product_website_params)
-    if product_website.save
+    @product_website = ProductWebsite.create(product_website_params)
+    if @product_website.save
       flash[:success] = "'#{@product_website.website_url}' has been saved"
       redirect_to '/product_websites/new'
     else
