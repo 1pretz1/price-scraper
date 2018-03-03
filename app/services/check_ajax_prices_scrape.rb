@@ -23,8 +23,15 @@ attr_accessor :ajax_products, :driver
     driver.quit
   end
 
+  #WIP
+
   def fetch_price(product)
-    sale_price = driver.find_element(xpath: product.product_website.sale_price_xpath).text
+    begin
+      sale_price = driver.find_element(xpath: product.product_website.sale_price_xpath).text
+      price = driver.find_element(xpath: product.product_website.price_xpath).text
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      failed_fetch(product)
+    end
     if sale_price.present?
       sale_price = correct_price_format(sale_price)
       compare_prices(sale_price: sale_price, product: product)
