@@ -1,18 +1,34 @@
 class ListProductsQuery
-  attr_accessor :user, :user_website_ids
+  attr_accessor :user
 
   def initialize(user:)
-    @user_website_ids = user.products.map { |x| x.product_website_id }.uniq
     @user = user
   end
 
-  def ajax
-    ajax = ProductWebsite.where(id: user_website_ids).where(price_ajax: true).ids
+  def all_ajax
+    all_ajax = ProductWebsite.all.where(price_ajax: true).ids
+    Product.all.where(product_website_id: all_ajax)
+  end
+
+  def all_none_ajax
+    all_none_ajax = ProductWebsite.all.where(price_ajax: false).ids
+    Product.all.where(product_website_id: all_none_ajax)
+  end
+
+  def user_ajax
+    fetch_user_website_ids
+    ajax = ProductWebsite.where(id: @user_website_ids).where(price_ajax: true).ids
     user.products.where(product_website_id: ajax)
   end
 
-  def none_ajax
-    no_ajax = ProductWebsite.where(id: user_website_ids).where(price_ajax: false).ids
-    user.products.where(product_website_id: no_ajax)
+  def user_none_ajax
+    fetch_user_website_ids
+    none_ajax = ProductWebsite.where(id: @user_website_ids).where(price_ajax: false).ids
+    user.products.where(product_website_id: none_ajax)
+  end
+
+  def fetch_user_website_ids
+    binding.pry
+    @user_website_ids = user.products.map { |x| x.product_website_id }.uniq
   end
 end

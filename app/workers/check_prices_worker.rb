@@ -1,6 +1,7 @@
-class UserPricesScrapeController < ApplicationController
+class CheckPricesWorker
+  include Sidekiq::Worker
 
-  def create
+  def perform
     if none_ajax_products.present?
       CheckPricesScrape.call(none_ajax_products: none_ajax_products)
     end
@@ -8,16 +9,14 @@ class UserPricesScrapeController < ApplicationController
     if ajax_products.present?
       CheckAjaxPricesScrape.call(ajax_products: ajax_products)
     end
-    redirect_to "/users/#{current_user.id}"
   end
 
-private
 
   def none_ajax_products
-    ListProductsQuery.new(user: current_user).user_none_ajax
+    ListProductsQuery.new(user: false).all_none_ajax
   end
 
   def ajax_products
-    ListProductsQuery.new(user: current_user).user_ajax
+    ListProductsQuery.new(user: false).all_ajax
   end
 end
