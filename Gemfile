@@ -8,6 +8,10 @@ end
 gem 'selenium-webdriver', '~> 3.8'
 gem 'chromedriver-helper', '~> 1.0'
 
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'sinatra'
+
 gem 'awesome_print'
 gem 'nokogiri'
 gem 'valid_url'

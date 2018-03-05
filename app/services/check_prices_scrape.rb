@@ -31,12 +31,14 @@ class CheckPricesScrape < InitialScrape
     return product.destroy if product.failed_attempts == 4
   end
 
+#WIP
   def check_page
     if page.xpath(product.product_website.sale_price_xpath).present? ||
        page.xpath(product.product_website.price_xpath).present?
        get_price
     end
   end
+#
 
   def get_price(product:, page:)
     page.remove_namespaces!

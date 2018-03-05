@@ -24,7 +24,6 @@ attr_accessor :ajax_products, :driver
   end
 
   #WIP
-
   def fetch_price(product)
     begin
       sale_price = driver.find_element(xpath: product.product_website.sale_price_xpath).text
@@ -37,4 +36,5 @@ attr_accessor :ajax_products, :driver
       compare_prices(sale_price: sale_price, product: product)
     end
   end
+  #
 end

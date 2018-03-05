@@ -1,0 +1,7 @@
+:schedule:
+  check_prices_worker:
+    name: 'CheckPricesWorker - every 5min'
+    cron: '*/1 * * * *'
+    class: 'CheckPricesWorker'
+
+    #cron: '30 8 * * *' # every day at 8:30am

@@ -1,6 +1,6 @@
 class ProductHaveWebsiteQuery
 
-  def self.call(:url)
+  def self.call()
   end
 end
 
