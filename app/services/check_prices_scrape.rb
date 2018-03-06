@@ -19,7 +19,7 @@ class CheckPricesScrape < InitialScrape
     none_ajax_products.each do |product|
       begin
         page = Nokogiri::HTML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
-        get_price(product: product, page: page)
+        check_page(product: product, page: page)
       rescue OpenURI::HTTPError
         failed_fetch(product)
       end
@@ -28,20 +28,25 @@ class CheckPricesScrape < InitialScrape
 
   def failed_fetch(product)
     product.increment!(:failed_attempts, 1)
-    return product.destroy if product.failed_attempts == 4
-  end
-
-#WIP
-  def check_page
-    if page.xpath(product.product_website.sale_price_xpath).present? ||
-       page.xpath(product.product_website.price_xpath).present?
-       get_price
+    if product.failed_attempts == 6
+      product.update!(
+        deleted_at: Time.now
+      )
     end
   end
-#
+
+  def check_page(product:, page:)
+    page.remove_namespaces!
+    if page.xpath(product.product_website.sale_price_xpath).present? ||
+       page.xpath(product.product_website.price_xpath).present? ||
+       page.xpath(product.product_website.title_xpath).text == product.name
+      get_price(product: product, page: page)
+    else
+      failed_fetch(product)
+    end
+  end
 
   def get_price(product:, page:)
-    page.remove_namespaces!
     sale_price = page.xpath(product.product_website.sale_price_xpath).text
     if sale_price.present?
       sale_price = correct_price_format(sale_price)
