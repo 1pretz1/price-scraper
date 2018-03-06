@@ -52,8 +52,12 @@ class CheckPricesScrape < InitialScrape
   def compare_prices(sale_price:, product:)
     if product.price.to_f > sale_price.to_f ||
       product.sale_price.to_f > sale_price.to_f
-
       product.update_attributes(sale_price: sale_price)
+    elsif product.sale_price.to_f < sale_price.to_f &&
+      product.price.to_f > sale_price.to_f
+      product.update_attributes(sale_price: sale_price)
+    elsif product.price.to_f == sale_price.to_f
+      product.update_attributes(sale_price: nil)
     end
   end
 end

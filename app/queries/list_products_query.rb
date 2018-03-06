@@ -28,7 +28,6 @@ class ListProductsQuery
   end
 
   def fetch_user_website_ids
-    binding.pry
     @user_website_ids = user.products.map { |x| x.product_website_id }.uniq
   end
 end
