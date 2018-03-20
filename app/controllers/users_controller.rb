@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include ApplicationHelper
+  include UserShowHelper
 
   def new
     @user = User.new
@@ -18,7 +18,11 @@ class UsersController < ApplicationController
 
   def show
     current_user
-    @orders = current_user.products.group_by { |x| url_host(x.product_url) }
+    if params[:items] == "SALE"
+      @items = DisplayProductFiltersQuery.new(user: current_user).on_sale_list
+    else params[:items] == "ALL"
+      @items = DisplayProductFiltersQuery.new(user: current_user).active_list
+    end
   end
 
   private

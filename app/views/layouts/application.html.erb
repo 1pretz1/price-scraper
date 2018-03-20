@@ -18,7 +18,7 @@
     <ul>
       <% if current_user %>
         <li>
-        <%= link_to "Items", user_path(current_user.id) %>
+        <%= link_to "Items", user_path(current_user.id, items: 'ALL') %>
         </li>
         <li>
         <%= link_to "Add Product", new_product_path %>

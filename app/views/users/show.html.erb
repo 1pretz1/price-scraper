@@ -1,33 +1,53 @@
-<div align='center' class='check_price_button'>
-  <%= link_to image_tag("refresh.png", class: "refresh_img"),
-      user_prices_scrape_index_path, method: "post" %></br>
+<script>
+  $(document).ready(function() {
+    $(".refresh_img").click(function () {
+      $("#refresh_image").toggleClass('rotate');
+    });
+  });
+</script>
+
+<div class='config_nav'>
+  <ul>
+    <li class="filters"><%= link_to "All Items", user_path(current_user, items: 'ALL'), method: "get", class: 'filter' %></li>
+    <li>
+      <div align='center' class='check_price_button'>
+        <%= link_to image_tag("refresh.png", class: "refresh_img", id: "refresh_image"),
+          user_prices_scrape_index_path, method: "post", class: "refresh", data: { disable_with: "Refreshing items..." } %></br>
+      </div>
+    </li>
+    <li class="filters">
+      <%= link_to "Sale Items", user_path(current_user, items: 'SALE'), method: "get" %>
+    </li>
+  </ul>
 </div>
 
-<% @orders.each do |website, product| %>
+<% any_products_removed? %>
+
+<% @items.each do |website, products| %>
   <div class='container'>
     <h2 class='product_item_header'><%= brand(website) %></h2>
     <ul class='product_list_ul' align='center' style="list-style-type: none">
-      <% product.each do |each_product| %>
+      <% products.each do |product| %>
         <div class='product_list_div'>
           <li class: 'delete_product_li'>
             <%= link_to image_tag('red-cross.png', class: "delete_product_img"),
-              product_path(each_product),
-              data: {confirm: "Are you sure you want to delete '#{each_product.name}' ?"},
+              product_path(product),
+              data: {confirm: "Are you sure you want to delete '#{product.name}' ?"},
               method: 'delete'
             %>
             </li>
-            <li class='product_name_li'><strong><%= each_product.name %></strong></li>
+            <li class='product_name_li'><strong><%= product.name %></strong></li>
             <li class='price_li'>
-            <% if each_product.sale_price.present? %>
-              £<%= each_product.price %>
-              <span>SALE: £<%= each_product.sale_price %></span>
+            <% if product.sale_price.present? %>
+              £<%= product.price %>
+              <span>SALE: £<%= product.sale_price %></span>
             <% else %>
-              <strong>£<%= each_product.price %></strong>
+              <strong>£<%= product.price %></strong>
             <% end %>
             </li>
             <li class='product_li'>
-            <%= link_to image_tag(each_product.image_url, class: "product_img"),
-              each_product.product_url,
+            <%= link_to image_tag(product.image_url, class: "product_img"),
+              product.product_url,
               target: :_blank
             %>
             </li>

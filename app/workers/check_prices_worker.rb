@@ -11,7 +11,6 @@ class CheckPricesWorker
     end
   end
 
-
   def none_ajax_products
     ListProductsQuery.new(user: false).all_none_ajax
   end

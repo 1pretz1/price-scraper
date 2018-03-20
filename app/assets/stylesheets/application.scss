@@ -118,6 +118,41 @@ h1 {
   margin-bottom: 20px;
 }
 
+//FILTER CONFIG
+.config_nav {
+
+  ul {
+    height: 55px;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  ul li {
+    display: inline-block;
+  }
+
+  ul li a {
+    padding: 5px;
+    color: #8c8c8c;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    font-weight: 420;
+  }
+
+  .filters {
+    margin-top:20px;
+  }
+
+  ul li a:hover {
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #533333;
+  }
+}
+
 //PRICE-CHECK-ICON
 
 .check_price_button {
@@ -125,27 +160,32 @@ h1 {
   margin-top: .7%;
 }
 
-.refresh_img {
+#refresh_image {
   height: 65px;
   width: 65px;
 
-  &:hover{
+  &:hover {
     border-radius: 50%;
-    animation: spin 1.5s 1 linear;
     text-decoration: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.1);
     color: #533333;
   }
-  &:active {
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
-  }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(359deg); }
+.rotate {
+  animation: spin 15s 1 linear;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  color: #533333;
 }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(4320deg); }
+  }
 
 //PRODUCTS-GROUPING-CONTAINER
 
@@ -202,6 +242,8 @@ h1 {
   margin:0;
   color: black;
   font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .price_li {
