@@ -1,5 +1,4 @@
 require 'open-uri'
-
 module ProductsHelper
 
   def page_scrape
@@ -9,13 +8,22 @@ module ProductsHelper
       .remove_namespaces!
   end
 
+  def product_scrape_and_save(page)
+    product = call_initial_scrape(page)
+    if product.save
+      product_save_success
+    else
+      product_save_failure
+    end
+  end
+
   def call_initial_scrape(page)
     if return_website.price_ajax == false
       InitialScrape.call(product_url: new_product_url,
                          page: page,
                          user: current_user,
                          website: return_website)
-    else
+    else return_website.price_ajax == true
       InitialAjaxScrape.call(url: new_product_url,
                              user: current_user,
                              website: return_website)
@@ -23,28 +31,13 @@ module ProductsHelper
   end
 
   def save_existing_product
-    product_count = current_user.products.count
-    current_user.product_users.create(user_id:
-                                      current_user.id,
-                                      product_id:
-                                      existing_product.id)
-
-    new_product_count = current_user.products.count
-
-    if product_count < new_product_count
-      product_save_success
-    else
-      flash[:error] = "'#{existing_product.name}' already exists in your items!"
-      redirect_to new_product_path
-    end
-  end
-
-  def product_scrape_and_save(page)
-    product = call_initial_scrape(page)
+    product = current_user.product_users.create(user_id: current_user.id,
+                                                product_id: return_product.id)
     if product.save
       product_save_success
     else
-      product_save_failure
+      flash[:error] = "'#{product.name}' already exists in your items!"
+      redirect_to new_product_path
     end
   end
 
@@ -63,19 +56,15 @@ module ProductsHelper
     redirect_to new_product_path
   end
 
-  def return_website
-    ProductWebsite.all.select do |saved_website|
-      new_product_url.include?(saved_website.website_url)
-    end.first
-  end
-
-  def existing_product
-    Product.all.select do |product|
-      product.product_url == new_product_url
-    end.first
-  end
-
   def new_product_url
     params[:product].values.first
+  end
+
+  def return_website
+    @return_website ||= CheckDataExistsQuery.new(new_product_url).return_existing_website
+  end
+
+  def return_product
+    @return_product ||= CheckDataExistsQuery.new(new_product_url).return_existing_product
   end
 end

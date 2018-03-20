@@ -36,16 +36,10 @@ class InitialScrape
   end
 
   def correct_price_format(price)
-    if price.include?('.')
-      element = price.split(" ").select { |element| element.include?('.') }.join
-      element.gsub(/([^0-9.])/, "")
-    elsif price.include?("£")
-      element = price.split(" ").select do |x|
-        x.include?("£")
-      end.join
-      element.gsub(/([^0-9.])/, "")
-    else
-      price.gsub(/([^0-9.])/, "")
-    end
+    price = price.gsub(/([^0-9.])/, "")
+    ActionController::Base.helpers.number_to_currency  price, unit: ''
   end
 end
+    #    if price.include?('.')
+    #      element = price.split(" ").select { |element| element.include?('.') }.join
+    #      element.gsub(/([^0-9.])/, "")

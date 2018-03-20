@@ -18,8 +18,11 @@ class UsersController < ApplicationController
 
   def show
     current_user
-    @active_items = DisplayProductFiltersQuery.new(user: current_user).active_items
-    #@on_sale = DisplayProductFiltersQuery.new(user: current_user).on_sale
+    if params[:items] == "SALE"
+      @items = DisplayProductFiltersQuery.new(user: current_user).on_sale_list
+    else params[:items] == "ALL"
+      @items = DisplayProductFiltersQuery.new(user: current_user).active_list
+    end
   end
 
   private

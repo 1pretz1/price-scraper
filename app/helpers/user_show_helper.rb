@@ -10,7 +10,7 @@ module UserShowHelper
 
   def deleted_message
     flash[:error] = "'#{ deleted.map { |x| x.name }.join(", ") }'
-                     have been removed as the URLs are no longer valid!"
+                     have been removed as the URL/s are no longer valid!"
   end
 
   def any_products_removed?

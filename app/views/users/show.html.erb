@@ -1,11 +1,29 @@
-<div align='center' class='check_price_button'>
-  <%= link_to image_tag("refresh.png", class: "refresh_img"),
-      user_prices_scrape_index_path, method: "post" %></br>
+<script>
+  $(document).ready(function() {
+    $(".refresh_img").click(function () {
+      $("#refresh_image").toggleClass('rotate');
+    });
+  });
+</script>
+
+<div class='config_nav'>
+  <ul>
+    <li class="filters"><%= link_to "All Items", user_path(current_user, items: 'ALL'), method: "get", class: 'filter' %></li>
+    <li>
+      <div align='center' class='check_price_button'>
+        <%= link_to image_tag("refresh.png", class: "refresh_img", id: "refresh_image"),
+          user_prices_scrape_index_path, method: "post", class: "refresh" %></br>
+      </div>
+    </li>
+    <li class="filters">
+      <%= link_to "Sale Items", user_path(current_user, items: 'SALE'), method: "get" %>
+    </li>
+  </ul>
 </div>
 
 <% any_products_removed? %>
 
-<% @active_items.each do |website, products| %>
+<% @items.each do |website, products| %>
   <div class='container'>
     <h2 class='product_item_header'><%= brand(website) %></h2>
     <ul class='product_list_ul' align='center' style="list-style-type: none">

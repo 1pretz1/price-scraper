@@ -12,6 +12,9 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'sinatra'
 
+gem 'jquery-rails'
+
+gem 'whenever', require: false
 gem 'awesome_print'
 gem 'nokogiri'
 gem 'valid_url'
@@ -51,7 +54,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'pry-byebug'
-  gem 'factory_girl_rails'
+  gem "factory_bot_rails"
 end
 
 group :development do

@@ -26,20 +26,10 @@ class CheckPricesScrape < InitialScrape
     end
   end
 
-  def failed_fetch(product)
-    product.increment!(:failed_attempts, 1)
-    if product.failed_attempts == 6
-      product.update!(
-        deleted_at: Time.now
-      )
-    end
-  end
-
   def check_page(product:, page:)
     page.remove_namespaces!
-    if page.xpath(product.product_website.sale_price_xpath).present? ||
-       page.xpath(product.product_website.price_xpath).present? ||
-       page.xpath(product.product_website.title_xpath).text == product.name
+    if page.xpath(product.product_website.title_xpath).text == product.name ||
+        page.xpath(product.product_website.image_xpath).text == product.image_url
       get_price(product: product, page: page)
     else
       failed_fetch(product)
@@ -63,6 +53,15 @@ class CheckPricesScrape < InitialScrape
       product.update_attributes(sale_price: sale_price)
     elsif product.price.to_f == sale_price.to_f
       product.update_attributes(sale_price: nil)
+    end
+  end
+
+  def failed_fetch(product)
+    product.increment!(:failed_attempts, 1)
+    if product.failed_attempts == 6
+      product.update!(
+        deleted_at: Time.now
+      )
     end
   end
 end
