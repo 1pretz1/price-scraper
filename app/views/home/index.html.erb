@@ -1,11 +1,42 @@
-<h1 align='center'>Price Monitoring Instructions:</h1>
+<div class='container'>
+<h1 align='center'>What other users are monitoring...</h1>
 
-<ol align='center' class='instruction_li' style="list-style-type: none">
-  <li>Signup/Login</li>
-  <img class='arrow_img' src="/assets/down-arrow.png">
-  <li>Click 'Add Product' located in the navbar</li>
-  <img class='arrow_img' src="/assets/down-arrow.png">
-  <li>Enter the items URL and click 'Submit'</li>
-  <img class='arrow_img' src="/assets/down-arrow.png">
-  <li>Your item/items are now being tracked</li>
-</ol>
+<div class='config_nav home_filter'>
+  <ul>
+    <li class="filters">
+      <%= link_to "Next page--->", '/', method: "get" %>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <ul class='product_list_ul' align='center' style="list-style-type: none">
+    <% @products.each do |product| %>
+      <div class='product_list_div'>
+        <li class='product_name_li'><strong><%= product.name %></strong></li>
+        <li class='price_li'>
+          <% if product.sale_price.present? %>
+            £<%= product.price %>
+          <span>SALE: £<%= product.sale_price %></span>
+        <% else %>
+          <strong>£<%= product.price %></strong>
+        <% end %>
+        </li>
+        <li class='product_li'>
+          <%= link_to image_tag(product.image_url, class: "product_img"),
+            product.product_url,
+            target: :_blank
+          %>
+      </li>
+      </div>
+    <% end %>
+  </ul>
+</div>
+
+<div class='config_nav home_filter'>
+  <ul>
+    <li class="filters">
+      <%= link_to "Next page--->", '/', method: "get" %>
+    </li>
+  </ul>
+</div>

@@ -27,6 +27,7 @@ class InitialAjaxScrape < InitialScrape
   end
 
   def get_info
+    sale_price = driver.find_element(xpath: website.sale_price_xpath).text
     price = driver.find_element(xpath: website.price_xpath).text
     attributes[:price] = correct_price_format(price)
     #META tags - attribute('content')

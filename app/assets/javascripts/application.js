@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree
+
+
+//toggle rotate of refresh icon until refresh is complete
+$(document).ready(function() {
+  $(".refresh_link").click(function () {
+    $(".refresh_img").toggleClass('rotate');
+  });
+});

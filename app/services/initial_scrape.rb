@@ -29,17 +29,19 @@ class InitialScrape
     attributes[:title] = page.xpath(website.title_xpath).text
     attributes[:image] = page.xpath(website.image_xpath).text
     attributes[:product_website_id] = website.id
-    if page.xpath(website.price_xpath).text.present?
+    if page.xpath(website.sale_price_xpath).text.present?
+      price = page.xpath(website.sale_price_xpath).text
+    elsif page.xpath(website.price_xpath).text.present?
       price = page.xpath(website.price_xpath).text
-      attributes[:price] = correct_price_format(price)
     end
+    attributes[:price] = correct_price_format(price)
   end
 
   def correct_price_format(price)
     price = price.gsub(/([^0-9.])/, "")
     ActionController::Base.helpers.number_to_currency  price, unit: ''
-  end
-end
     #    if price.include?('.')
     #      element = price.split(" ").select { |element| element.include?('.') }.join
     #      element.gsub(/([^0-9.])/, "")
+  end
+end

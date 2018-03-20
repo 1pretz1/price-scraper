@@ -1,11 +1,35 @@
 module UserShowHelper
 
-  def brand(website)
-    website.split('.')[1].capitalize
+  def all_users_items
+    @all_users_items ||= current_user.products
   end
 
-  def deleted
-    DisplayProductFiltersQuery.new(user: current_user).deleted_items
+  def active_items
+    @active_items ||= all_users_items.where(deleted_at: nil)
+  end
+
+  def sale_items
+    @sale_items ||= active_items.select { |x| x.sale_price != nil }
+  end
+
+  def total_items_count
+    active_items.count
+  end
+
+  def total_sale_items_count
+    sale_items.count
+  end
+
+  def group_by_brand(filter)
+    filter.group_by { |x| url_host(x.product_url) }.sort
+  end
+
+  def deleted_items
+    all_users_items.where.not(deleted_at: nil)
+  end
+
+  def any_products_removed?
+    return deleted_message if deleted_items.count > 0
   end
 
   def deleted_message
@@ -13,7 +37,11 @@ module UserShowHelper
                      have been removed as the URL/s are no longer valid!"
   end
 
-  def any_products_removed?
-    return deleted_message if deleted.count > 0
+  def brand(website)
+    website.split('.')[1].capitalize
+  end
+
+  def url_host(url)
+    URI(url).host
   end
 end
