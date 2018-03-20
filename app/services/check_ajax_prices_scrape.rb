@@ -13,6 +13,7 @@ attr_accessor :ajax_products, :driver
     fetch_pages(ajax_products)
   end
 
+  ##this is broke
   def fetch_pages(ajax_products)
     ajax_products.each do |product|
       options = Selenium::WebDriver::Chrome::Options.new(args: ['headless'])

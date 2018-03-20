@@ -18,10 +18,13 @@ class UsersController < ApplicationController
 
   def show
     current_user
-    if params[:items] == "SALE"
-      @items = DisplayProductFiltersQuery.new(user: current_user).on_sale_list
-    else params[:items] == "ALL"
-      @items = DisplayProductFiltersQuery.new(user: current_user).active_list
+    @active_items = active_items
+    @sale_items = sale_items
+
+    if params[:items] == 'SALE'
+      @items = group_by_brand(@sale_items)
+    else
+      @items = group_by_brand(@active_items)
     end
   end
 

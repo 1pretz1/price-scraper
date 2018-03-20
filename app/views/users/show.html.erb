@@ -1,22 +1,14 @@
-<script>
-  $(document).ready(function() {
-    $(".refresh_img").click(function () {
-      $("#refresh_image").toggleClass('rotate');
-    });
-  });
-</script>
-
 <div class='config_nav'>
   <ul>
-    <li class="filters"><%= link_to "All Items", user_path(current_user, items: 'ALL'), method: "get", class: 'filter' %></li>
+    <li class="filters"><%= link_to "All Items(#{total_items_count})", user_path(current_user, items: 'ALL'), method: "get", class: 'filter' %></li>
     <li>
       <div align='center' class='check_price_button'>
-        <%= link_to image_tag("refresh.png", class: "refresh_img", id: "refresh_image"),
-          user_prices_scrape_index_path, method: "post", class: "refresh", data: { disable_with: "Refreshing items..." } %></br>
+        <%= link_to image_tag("refresh.png", class: "refresh_img"),
+          user_prices_scrape_index_path, method: "post", class: "refresh_link" %></br>
       </div>
     </li>
     <li class="filters">
-      <%= link_to "Sale Items", user_path(current_user, items: 'SALE'), method: "get" %>
+      <%= link_to "Sale Items(#{total_sale_items_count})", user_path(current_user, items: 'SALE'), method: "get" %>
     </li>
   </ul>
 </div>

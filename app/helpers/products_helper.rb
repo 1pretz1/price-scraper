@@ -5,7 +5,7 @@ module ProductsHelper
     user_agent = 'Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7)
                   Gecko/2009021910 Firefox/3.0.7'
     begin
-    Nokogiri::HTML(open(new_product_url, 'User-agent' => user_agent), nil, 'UTF-8')
+    Nokogiri::HTML(open(new_product_url, 'User-agent' => user_agent), nil)
       .remove_namespaces!
     rescue OpenURI::HTTPError
       flash[:error] = "Page can't be found! (HTTP error)"

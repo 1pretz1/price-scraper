@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :product_websites, only: [:new, :create]
   resources :user_prices_scrape, only: :create
 
+  get '/help', to: 'home#show'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'

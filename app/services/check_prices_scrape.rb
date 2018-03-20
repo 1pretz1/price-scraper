@@ -18,7 +18,7 @@ class CheckPricesScrape < InitialScrape
   def fetch_prices(none_ajax_products)
     none_ajax_products.each do |product|
       begin
-        page = Nokogiri::HTML(open(product.product_url,'User-Agent' => user_agent), nil, "UTF-8")
+        page = Nokogiri::HTML(open(product.product_url,'User-Agent' => user_agent), nil)
         check_page(product: product, page: page)
       rescue OpenURI::HTTPError
         failed_fetch(product)
